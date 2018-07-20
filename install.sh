@@ -16,6 +16,7 @@ for i in $HOME/.vim $HOME/.vimrc $HOME/.gvimrc; do [ -e $i ] && [ ! -L $i ] && m
 for i in $HOME/.vim $HOME/.vimrc $HOME/.gvimrc; do [ ! -L $i ] && unlink $i ; done
 
 echo "2-->setting up symlinks"
+lnif $CURRENT_DIR/config_ubuntu $CURRENT_DIR/config
 lnif $CURRENT_DIR/vimrc $HOME/.vimrc
 lnif $CURRENT_DIR/../vim $HOME/.vim
 
