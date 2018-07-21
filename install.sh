@@ -10,13 +10,25 @@ lnif() {
     fi
 }
 
+CONFIG="config_ubuntu"
+if [ $1 ] ; then
+    if [ -d "./config_$1" ] ; then
+        CONFIG="config_$1"
+    else
+        echo "config_$1 not found!!! exit!";
+        exit 1
+    fi
+fi
+
+
+
 echo "1-->backing up current vim config"
 today=`date +%Y%m%d`
 for i in $HOME/.vim $HOME/.vimrc $HOME/.gvimrc; do [ -e $i ] && [ ! -L $i ] && mv $i $i.$today; done
 for i in $HOME/.vim $HOME/.vimrc $HOME/.gvimrc; do [ ! -L $i ] && unlink $i ; done
 
 echo "2-->setting up symlinks"
-lnif $CURRENT_DIR/config_ubuntu $CURRENT_DIR/config
+lnif $CURRENT_DIR/$CONFIG $CURRENT_DIR/config
 lnif $CURRENT_DIR/vimrc $HOME/.vimrc
 lnif $CURRENT_DIR/../vim $HOME/.vim
 
